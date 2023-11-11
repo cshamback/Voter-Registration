@@ -1,0 +1,37 @@
+#include <iostream>
+using namespace std;
+
+string registrationInfo[6];
+string form;
+
+int main() {
+  cout << "!!Register To Vote!!" << endl << endl;
+  
+}
+
+class RegistrationManager {
+  public:
+    string registrationDB[9];
+    int voterID;
+    string form;
+    void genID();
+    void storeInfo();
+    int returnSuccess();
+};
+
+void RegistrationManager::genID(){
+  voterID = rand() % 10000;
+}
+
+void RegistrationManager::storeInfo(){
+  registrationDB[0] = voterID;
+  registrationDB[1] = form;
+  for( int i = 2; i < 9; i++ ){
+    int j = 0;
+    registrationDB[i] = registrationInfo[j];
+    j++;
+}
+
+int RegistrationManager::returnSuccess(){
+  return voterID;
+}
