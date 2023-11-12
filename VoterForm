@@ -6,12 +6,9 @@ string registrationInfo[6];
 string form;
 
 void fillOutForm();
-void updateInfo();
-void passToChecker();
 
 int main() {
   fillOutForm();
-  updateInfo();
 }
 
 class VoterForm {
