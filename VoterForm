@@ -1,3 +1,19 @@
+#include <string>
+#include <iostream>
+using namespace std;
+
+string registrationInfo[6];
+string form;
+
+void fillOutForm();
+void updateInfo();
+void passToChecker();
+
+int main() {
+  fillOutForm();
+  updateInfo();
+}
+
 class VoterForm {
     public:
     string registrationInfo[6]; //fName, lName, age, residency, ssn,           felony
@@ -7,27 +23,25 @@ class VoterForm {
     void passToChecker();
 };
 
-void VoterForm::fillOutForm() {
-  cout << "Which form would you like to fil out? (Overseas, Online, xxxxx)" << endl;
-  cin >> form;
+void fillOutForm() {
+  cout << "Which form would you like to fill out? (Overseas, Online, xxxxx)" << endl;
+  getline(cin, form);
+  
   cout << "Enter your first name: " << endl;
   cin >> registrationInfo[0];
+  
   cout << "Enter your last name: " << endl;
   cin >> registrationInfo[1];
+  
   cout << "Enter your age: " << endl;
   cin >> registrationInfo[2];
+  
   cout << "Enter your address: " << endl;
-  cin >> registrationInfo[3];
+  getline(cin, registrationInfo[3]);
+  
   cout << "Enter your SSN: " << endl;
   cin >> registrationInfo[4];
+  
   cout << "Have you commited a felony (Y/N)" << endl;
   cin >> registrationInfo[5];
-}
-
-void VoterForm::updateInfo() {
- // ?????
-}
-
-void VoterForm::passToChecker() {
-  
 }
