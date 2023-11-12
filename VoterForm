@@ -16,8 +16,6 @@ class VoterForm {
     string registrationInfo[6]; //fName, lName, age, residency, ssn,           felony
     string form; //Overseas, Online, xxxxx
     void fillOutForm();
-    void updateInfo();
-    void passToChecker();
 };
 
 void fillOutForm() {
