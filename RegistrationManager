@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-string registrationInfo[6];
+string managerRegistrationInfo[6];
 string form;
 
 int main() {
@@ -28,7 +28,7 @@ void RegistrationManager::storeInfo(){
   registrationDB[1] = form;
   for( int i = 2; i < 9; i++ ){
     int j = 0;
-    registrationDB[i] = registrationInfo[j];
+    registrationDB[i] = managerRegistrationInfo[j];
     j++;
 }
 
