@@ -4,11 +4,6 @@ using namespace std;
 string managerRegistrationInfo[6];
 string form;
 
-int main() {
-  cout << "!!Register To Vote!!" << endl << endl;
-  
-}
-
 class RegistrationManager {
   public:
     string registrationDB[9];
