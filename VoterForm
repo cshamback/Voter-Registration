@@ -7,10 +7,6 @@ string form;
 
 void fillOutForm();
 
-int main() {
-  fillOutForm();
-}
-
 class VoterForm {
     public:
     string formRegistrationInfo[6]; //fName, lName, age, residency, ssn,           felony
