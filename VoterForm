@@ -3,20 +3,20 @@
 using namespace std;
 
 string formRegistrationInfo[6];
-string form;
+string formName;
 
 void fillOutForm();
 
 class VoterForm {
     public:
     string formRegistrationInfo[6]; //fName, lName, age, residency, ssn,           felony
-    string form; //Overseas, Online, xxxxx
+    string formName; //Overseas, Online, xxxxx
     void fillOutForm();
 };
 
 void fillOutForm() {
   cout << "Which form would you like to fill out? (Overseas, Online, xxxxx)" << endl;
-  getline(cin, form);
+  getline(cin, formName);
   
   cout << "Enter your first name: " << endl;
   cin >> formRegistrationInfo[0];
