@@ -1,20 +1,13 @@
-#include <string>
+#ifndef VOTER_FORM_CPP
+#define VOTER_FORM_CPP
+
+#include "VoterForm.h"
 #include <iostream>
+#include <string>
+
 using namespace std;
 
-string formRegistrationInfo[6];
-string formName;
-
-void fillOutForm();
-
-class VoterForm {
-    public:
-    string formRegistrationInfo[6]; //fName, lName, age, residency, ssn,           felony
-    string formName; //Overseas, Online, xxxxx
-    void fillOutForm();
-};
-
-void fillOutForm() {
+void VoterForm::fillOutForm() {
   cout << "Which form would you like to fill out? (Overseas, Online, xxxxx)" << endl;
   getline(cin, formName);
   
@@ -32,6 +25,9 @@ void fillOutForm() {
   
   cout << "Enter your SSN: " << endl;
   cin >> formRegistrationInfo[4];
+}
+
+#endif
   
   cout << "Have you commited a felony (Y/N)" << endl;
   cin >> formRegistrationInfo[5];
