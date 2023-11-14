@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-string registrationInfo[6];
+string formRegistrationInfo[6];
 string form;
 
 void fillOutForm();
@@ -13,7 +13,7 @@ int main() {
 
 class VoterForm {
     public:
-    string registrationInfo[6]; //fName, lName, age, residency, ssn,           felony
+    string formRegistrationInfo[6]; //fName, lName, age, residency, ssn,           felony
     string form; //Overseas, Online, xxxxx
     void fillOutForm();
 };
@@ -23,20 +23,20 @@ void fillOutForm() {
   getline(cin, form);
   
   cout << "Enter your first name: " << endl;
-  cin >> registrationInfo[0];
+  cin >> formRegistrationInfo[0];
   
   cout << "Enter your last name: " << endl;
-  cin >> registrationInfo[1];
+  cin >> formRegistrationInfo[1];
   
   cout << "Enter your age: " << endl;
-  cin >> registrationInfo[2];
+  cin >> formRegistrationInfo[2];
   
   cout << "Enter your address: " << endl;
-  getline(cin, registrationInfo[3]);
+  getline(cin, formRegistrationInfo[3]);
   
   cout << "Enter your SSN: " << endl;
-  cin >> registrationInfo[4];
+  cin >> formRegistrationInfo[4];
   
   cout << "Have you commited a felony (Y/N)" << endl;
-  cin >> registrationInfo[5];
+  cin >> formRegistrationInfo[5];
 }
