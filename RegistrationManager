@@ -1,16 +1,13 @@
+#ifndef REGISTRATION_MANAGER_CPP
+#define REGISTRATION_MANAGER_CPP
+
+#include "RegistrationManager.h"
 #include <iostream>
+#include <string>
+
 using namespace std;
 
-class RegistrationManager {
-  public:
-    string managerRegistrationInfo[6];
-    string registrationDB[9];
-    int voterID;
-    string form;
-    void genID();
-    void storeInfo();
-    int returnSuccess();
-};
+RegistrationManager::RegistrationManager() noexcept { voterID = -1; }
 
 void RegistrationManager::genID(){
   voterID = rand() % 10000;
@@ -28,3 +25,5 @@ void RegistrationManager::storeInfo(){
 int RegistrationManager::returnSuccess(){
   return voterID;
 }
+
+#endif
