@@ -8,27 +8,35 @@
 using namespace std;
 
 void VoterForm::fillOutForm() {
-  cout << "Which form would you like to fill out? (Overseas, Online, xxxxx)" << endl;
-  getline(cin, formName);
+  string felonyStatus;
   
+  cout << "Which form would you like to fill out? (Overseas, Online, etc.)" << endl;
+  getline(cin, formType);
+
   cout << "Enter your first name: " << endl;
   cin >> formRegistrationInfo[0];
-  
+
   cout << "Enter your last name: " << endl;
   cin >> formRegistrationInfo[1];
-  
+
   cout << "Enter your age: " << endl;
   cin >> formRegistrationInfo[2];
-  
+
   cout << "Enter your address: " << endl;
   getline(cin, formRegistrationInfo[3]);
-  
+
   cout << "Enter your SSN: " << endl;
   cin >> formRegistrationInfo[4];
+
+  cout << "Have you committed a felony? (Y/N)" << endl;
+  cin >> felonyStatus;
+  // Ensures that the value entered is either "Y" or "N"
+  while(felonyStatus != "Y" || felonyStatus != "N") {
+    cout << "Invalid value." << endl;
+    cout << "Have you committed a felony? (Y/N)" << endl;
+    cin >> felonyStatus;
+  }
+  formRegistrationInfo[5] = felonyStatus;
 }
 
 #endif
-  
-  cout << "Have you commited a felony (Y/N)" << endl;
-  cin >> formRegistrationInfo[5];
-}
