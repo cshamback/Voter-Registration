@@ -1,17 +1,19 @@
 #ifndef VOTER_FORM_H
 #define VOTER_FORM_H
 
-#import <string>
+#include <string>
 
 using namespace std;
 
 class VoterForm {
 public:
-  VoterForm();
-  void fillOutForm();
+  VoterForm(); // Default constructor
+  void fillOutForm(); // gets user input to fill out registration form
+  string* getFormInfo(); // returns a pointer to formRegistrationInfo
 
-  string formRegistrationInfo[6]; // fName, lName, age, residency, ssn, felony
-  string formName;                // Overseas, Online, xxxxx
+  // First name, last name, age, residency, SSN, and felony status
+  string formRegistrationInfo[6];
+  string formType; // Overseas, Online, etc.
 };
 
 #endif
