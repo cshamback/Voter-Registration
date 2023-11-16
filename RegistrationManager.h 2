@@ -8,13 +8,13 @@ class RegistrationManager {
 public:
   RegistrationManager() noexcept;
   
-  void genID();
+  int genID();
   void storeInfo();
   int returnSuccess();
 
   string managerRegistrationInfo[6];
   string registrationDB[9];
-  int voterID = 00000000;
+  int voterID = 0;
   string form;
 };
 
