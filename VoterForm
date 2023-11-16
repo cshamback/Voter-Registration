@@ -7,36 +7,55 @@
 
 using namespace std;
 
+/*
+Voter form contents indexes:
+0. First name
+1. Last name
+2. Age
+3. Address
+4. SSN
+5. Felony status
+*/
+
+VoterForm::VoterForm() {}
+
 void VoterForm::fillOutForm() {
   string felonyStatus;
-  
-  cout << "Which form would you like to fill out? (Overseas, Online, etc.)" << endl;
+
+  cout << "Which form would you like to fill out? (Overseas, Online, etc.)"
+       << endl;
   getline(cin, formType);
 
-  cout << "Enter your first name: " << endl;
+  cout << "Enter your first name: " << endl; // Gets the first name of the user
   cin >> formRegistrationInfo[0];
 
-  cout << "Enter your last name: " << endl;
+  cout << "Enter your last name: " << endl; // Gets the last name of the user
   cin >> formRegistrationInfo[1];
 
-  cout << "Enter your age: " << endl;
+  cout << "Enter your age: " << endl; // Gets the age of the user
   cin >> formRegistrationInfo[2];
 
-  cout << "Enter your address: " << endl;
+  cin.ignore();
+  cout << "Enter your address: " << endl; // Gets the home address of the user
   getline(cin, formRegistrationInfo[3]);
 
-  cout << "Enter your SSN: " << endl;
+  cout << "Enter your SSN: " << endl; // Gets the SSN of the user
   cin >> formRegistrationInfo[4];
 
+  // Asks whether the user is a felon or not
   cout << "Have you committed a felony? (Y/N)" << endl;
   cin >> felonyStatus;
   // Ensures that the value entered is either "Y" or "N"
-  while(felonyStatus != "Y" || felonyStatus != "N") {
+  while (felonyStatus != "Y" && felonyStatus != "N") {
     cout << "Invalid value." << endl;
     cout << "Have you committed a felony? (Y/N)" << endl;
     cin >> felonyStatus;
   }
   formRegistrationInfo[5] = felonyStatus;
+}
+
+string *VoterForm::getFormInfo() { // returns a pointer to formRegistrationInfo
+  return formRegistrationInfo;
 }
 
 #endif
