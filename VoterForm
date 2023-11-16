@@ -17,10 +17,10 @@ Voter form contents indexes:
 5. Felony status
 */
 
-VoterForm::VoterForm() {}
+VoterForm::VoterForm() {} // Default constructor
 
 void VoterForm::fillOutForm() {
-  string felonyStatus;
+  string felonyStatus; // Is the user a felon?
 
   cout << "Which form would you like to fill out? (Overseas, Online, etc.)"
        << endl;
