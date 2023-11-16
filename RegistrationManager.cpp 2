@@ -10,14 +10,10 @@ using namespace std;
 // should also set form variable - get from VoterForm object
 RegistrationManager::RegistrationManager() noexcept { voterID = -1; }
 
-/*
-Using a random ID generator should work for the purpose of the project,
-but creating duplicate IDs this way is possible.
-Instead, we might be able to create a unique ID using voter information,
-or by adding 1 to the previous ID.
-*/
-
-void RegistrationManager::genID() { voterID = voterID +1; }
+int RegistrationManager::genID() { 
+  voterID = voterID +1; 
+  return voterID;
+}
 
 void RegistrationManager::storeInfo() {
   registrationDB[0] = voterID;
