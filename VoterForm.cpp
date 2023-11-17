@@ -28,30 +28,43 @@ void VoterForm::fillOutForm() {
 
   cout << "Enter your first name: " << endl; // Gets the first name of the user
   cin >> formRegistrationInfo[0];
+  fNameOutput = "Accepted.";
 
   cout << "Enter your last name: " << endl; // Gets the last name of the user
   cin >> formRegistrationInfo[1];
+  lNameOutput = "Accepted.";
 
   cout << "Enter your age: " << endl; // Gets the age of the user
   cin >> formRegistrationInfo[2];
+  ageOutput = "Accepted.";
 
+  /*
+  If the user chooses the overseas form, they should be able to put in a "0"
+  for their ZIP code to indicate that they don't have a ZIP code. Otherwise,
+  this would be an invalid value.
+  */
   cin.ignore();
-  cout << "Enter your address: " << endl; // Gets the home address of the user
+  cout << "Enter your ZIP code " << endl; // Gets the ZIP code of the user
   getline(cin, formRegistrationInfo[3]);
+  zipOutput = "Accepted.";
 
   cout << "Enter your SSN: " << endl; // Gets the SSN of the user
   cin >> formRegistrationInfo[4];
+  ssnOutput = "Accepted.";
 
   // Asks whether the user is a felon or not
   cout << "Have you committed a felony? (Y/N)" << endl;
   cin >> felonyStatus;
-  // Ensures that the value entered is either "Y" or "N"
-  while (felonyStatus != "Y" && felonyStatus != "N") {
+  // Ensures that the value entered is either "Y" or "N" (uppercase or
+  // lowercase)
+  while (felonyStatus != "Y" && felonyStatus != "N" && felonyStatus != "y" &&
+         felonyStatus != "n") {
     cout << "Invalid value." << endl;
     cout << "Have you committed a felony? (Y/N)" << endl;
     cin >> felonyStatus;
   }
   formRegistrationInfo[5] = felonyStatus;
+  felonyOutput = "Accepted.";
 }
 
 string *VoterForm::getFormInfo() { // returns a pointer to formRegistrationInfo
