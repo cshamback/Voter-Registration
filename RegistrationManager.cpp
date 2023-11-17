@@ -15,7 +15,7 @@ int RegistrationManager::genID() {
   return voterID;
 }
 
-void RegistrationManager::storeInfo() {
+void RegistrationManager::storeInfo(string *voterForm, string formType) {
   registrationDB[0] = voterID;
   registrationDB[1] = form; // form type: online or overseas (need to set using constructor)
   for (int i = 2; i < 9; i++) {
