@@ -8,6 +8,7 @@
 using namespace std;
 
 ValidateForm::ValidateForm() { // default constructor
+  formIsValid = false;
 }
 
 bool ValidateForm::checkForm() {
@@ -29,6 +30,7 @@ bool ValidateForm::checkForm() {
   else {
     cout << "User is eligible to vote. \n"; // if everything passes, they are
                                             // eligible and it returns 1
+    formIsValid = true;
     return 1;
   }
 
