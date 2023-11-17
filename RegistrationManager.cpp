@@ -8,7 +8,7 @@
 using namespace std;
 
 // should also set form variable - get from VoterForm object
-RegistrationManager::RegistrationManager() noexcept { voterID = -1; }
+RegistrationManager::RegistrationManager() noexcept { voterID = 0; }
 
 int RegistrationManager::genID() { 
   voterID = voterID +1; 
@@ -19,12 +19,8 @@ void RegistrationManager::storeInfo() {
   registrationDB[0] = voterID;
   registrationDB[1] = form; // form type: online or overseas (need to set using constructor)
   for (int i = 2; i < 9; i++) {
-    int j = 0;
-    registrationDB[i] = managerRegistrationInfo[j];
-    j++;
-  }
+        registrationDB[i] = voterForm[i - 2];
+    }
 }
-
-int RegistrationManager::returnSuccess() { return voterID; }
 
 #endif
