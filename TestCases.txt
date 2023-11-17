@@ -1,0 +1,165 @@
+TEST(RegistrationManagerGenID, passing) {
+	// by default, genID adds 1 to the previous ID. 
+	RegistrationManager mgr;
+	mgr.voterID = 12342342;
+
+	EXPECT_EQ(mgr.genID(), 12342343);
+}
+
+TEST(RegistrationManagerGenID, failing) {
+	// if the test fails, the voterID should be set to -1
+	RegistrationManager mgr;
+	ValidateForm vf;
+
+	EXPECT_EQ(vf.formIsValid == false, mgr.voterID == -1);
+}
+
+// name inputs (first and last) should only accept letters - no numbers or special characters
+TEST(VoterFormInput, firstNameCorrect) {
+	VoterForm vf;
+
+	EXPECT_EQ(vf.formRegistrationInfo[0] == "Amy", vf.fNameOutput == "Accepted.");
+}
+
+TEST(VoterFormInput, firstNameInorrect) {
+	VoterForm vf;
+
+	EXPECT_EQ(vf.formRegistrationInfo[0] == "4my", vf.fNameOutput == "Not accepted.");
+}
+
+TEST(VoterFormInput, lastNameCorrect) {
+	VoterForm vf;
+
+	EXPECT_EQ(vf.formRegistrationInfo[1] == "Smith", vf.fNameOutput == "Accepted.");
+}
+
+TEST(VoterFormInput, lastNameInorrect) {
+	VoterForm vf;
+
+	EXPECT_EQ(vf.formRegistrationInfo[1] == "5m1th", vf.fNameOutput == "Not accepted.");
+}
+
+// age input should only accept integers
+TEST(VoterFormInput, ageCorrect) {
+	VoterForm vf;
+	
+	EXPECT_EQ(vf.formRegistrationInfo[2] == "21", vf.ageOutput == "Accepted.");
+}
+
+TEST(VoterFormInput, ageInorrect) {
+	VoterForm vf;
+
+	EXPECT_EQ(vf.formRegistrationInfo[2] == "Twenty-one", vf.ageOutput == "Not accepted.");
+}
+
+// SSN input should only accept strings of numbers >= 9 characters long 
+TEST(VoterFormInput, ssnCorrect) {
+	VoterForm vf;
+
+	EXPECT_EQ(vf.formRegistrationInfo[3] == "123456789", vf.ssnOutput == "Accepted.");
+}
+
+TEST(VoterFormInput, firsNameInorrectTooShort) {
+	VoterForm vf;
+
+	EXPECT_EQ(vf.formRegistrationInfo[3] == "123", vf.fNameOutput == "Not accepted.");
+}
+
+TEST(VoterFormInput, firsNameInorrectNotANumber) {
+	VoterForm vf;
+
+	EXPECT_EQ(vf.formRegistrationInfo[3] == "Social Security Number", vf.fNameOutput == "Not accepted.");
+}
+
+// zip code should start with "36" and be 5 numbers long. It must be an integer. 
+TEST(VoterFormInput, zipCorrect) {
+	VoterForm vf;
+
+	EXPECT_EQ(vf.formRegistrationInfo[4] == "36695", vf.fNameOutput == "Accepted.");
+}
+
+TEST(VoterFormInput, zipIncorrectPrefix) {
+	VoterForm vf;
+
+	EXPECT_EQ(vf.formRegistrationInfo[4] == "44695", vf.fNameOutput == "Not accepted.");
+}
+
+TEST(VoterFormInput, zipIncorrectWrongLength) {
+	VoterForm vf;
+
+	EXPECT_EQ(vf.formRegistrationInfo[4] == "3669", vf.fNameOutput == "Not accepted.");
+}
+
+TEST(VoterFormInput, zipIncorrectNotANumber) {
+	VoterForm vf;
+
+	EXPECT_EQ(vf.formRegistrationInfo[4] == "Zip Code", vf.fNameOutput == "Not accepted.");
+}
+
+// user should answer the question about having committed a felony with either a Y, a y, an N, or an n. 
+TEST(VoterFormInput, felonyCorrect) {
+	VoterForm vf;
+
+	EXPECT_EQ(vf.formRegistrationInfo[5] == "Y" || vf.formRegistrationInfo[5] == "y"
+		|| vf.formRegistrationInfo[5] == "N" || vf.formRegistrationInfo[5] == "n", vf.fNameOutput == "Accepted.");
+}
+
+TEST(VoterFormInput, felonyIncorrect) {
+	VoterForm vf;
+
+	EXPECT_EQ(vf.formRegistrationInfo[5] == "Yes", vf.fNameOutput == "Not accepted.");
+}
+
+TEST(VoterForm, LocationCorrect){
+  VoterForm vf;
+
+  // The two available types of voter registration forms are overseas and online forms.
+  EXPECT_EQ(vf.formTypeStatus == "Overseas" || vf.formTypeStatus == "Online", vf.formTypeOutput == "Accepted.");
+}
+
+TEST(VoterForm, LocationIncorrect)  {
+  VoterForm vf;
+
+  // The type of form submitted by the user is neither an online nor an overseas form.
+  EXPECT_EQ(vf.formTypeStatus != "Overseas" && vf.formTypeStatus != "Online", vf.formTypeOutput == "Invalid form.")
+}
+
+TEST(RegistrationManagerStoreInfo, anyInfo) {
+	// storing the info given by the user in registrationDB should be a direct copying of data. 
+	string dummyInfo[6] = { "Mike", "Dong", "21", "36695", "SSN", "Y" };
+	RegistrationManager mgr; 
+
+	mgr.storeInfo(dummyInfo, "Online");
+
+	EXPECT_EQ(dummyInfo[1], mgr.registrationDB[1]);
+}
+
+TEST(RegistrationManagerStoreInfo, felony) {
+	// storing the info given by the user in registrationDB should be a direct copying of data. 
+  // however, since Todd has committed a felony, his information will not be stored. 
+	string dummyInfo[6] = { "Todd", "Snider", "45", "36609", "123456789", "Y" };
+	RegistrationManager mgr; 
+  mgr.storeInfo(dummyInfo, "Overseas");
+
+	EXPECT_EQ(null, mgr.registrationDB);
+}
+
+TEST(RegistrationManagerStoreInfo, invalidSSN) {
+	// storing the info given by the user in registrationDB should be a direct copying of data. 
+  // however, since Todd has committed a felony, his information will not be stored. 
+	string dummyInfo[6] = { "Richard", "Long", "31", "36695", "000", "N" };
+	RegistrationManager mgr; 
+  mgr.storeInfo(dummyInfo, "Overseas");
+
+	EXPECT_EQ(null, mgr.registrationDB);
+}
+
+TEST(RegistrationManagerStoreInfo, invalidSSN) {
+	// storing the info given by the user in registrationDB should be a direct copying of data. 
+  // however, since Todd has committed a felony, his information will not be stored. 
+	string dummyInfo[6] = { "Sam", "Sung", "19", "1", "420000000", "N" };
+	RegistrationManager mgr; 
+  mgr.storeInfo(dummyInfo, "Overseas");
+
+	EXPECT_EQ(null, mgr.registrationDB);
+}
