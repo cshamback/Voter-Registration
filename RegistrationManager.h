@@ -9,13 +9,10 @@ public:
   RegistrationManager() noexcept;
   
   int genID();
-  void storeInfo();
-  int returnSuccess();
+  void storeInfo(string *voterForm, string formType);
 
-  string managerRegistrationInfo[6];
-  string registrationDB[9];
+  string registrationDB[8];
   int voterID = 0;
-  string form;
 };
 
 #endif
