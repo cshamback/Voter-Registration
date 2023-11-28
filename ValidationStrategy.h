@@ -11,7 +11,7 @@ class ValidationStrategy {
 public:
   ValidationStrategy();
 
-  bool chooseOnlineStrategy(ValidateOnlineForm *form);
+  bool chooseOnlineStrategy(ValidateOnlineForm *form, string *formInfo);
   bool chooseOverseasStrategy(ValidateOverseasForm *form);
 };
 
