@@ -15,6 +15,7 @@ public:
   string registrationInfo[6]; // fName, lName, age, residency, ssn, felony
   bool formIsValid;
   string overseas;
+  int i; 
 };
 
 #endif
