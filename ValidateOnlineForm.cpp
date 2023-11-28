@@ -7,10 +7,6 @@
 
 using namespace std;
 
-// define methods from class diagram here
-// example:
-// returnType ClassName::methodName(parameters) { definition }
-
 ValidateOnlineForm::ValidateOnlineForm() { // default constructor
   formIsValid = false;
 }
@@ -18,17 +14,20 @@ ValidateOnlineForm::ValidateOnlineForm() { // default constructor
 bool ValidateOnlineForm::checkResidency() {
   if (registrationInfo[3].length() < 5 || registrationInfo[3].length() > 5) {
     cout << "Zip code is not the correct length " << endl;
+
+    formIsValid = false
     return false;
   }
-
   else if (registrationInfo[3].compare(0, 2, "36") == 0) {
-    formIsValid = true;
     cout << "Zip code is valid." << endl;
+
+    formIsValid = true;
     return true;
   }
-
   else {
     cout << "Zip code is not from Alabama" << endl;
+
+    formIsValid = false;
     return false;
   }
 }
