@@ -19,7 +19,7 @@ public:
   string formType;            // same as registrationInfo[3]
 
   bool formIsValid;
-  bool checkForm(); // also acts as a getter method
+  bool checkForm(string* form); // also acts as a getter method
 };
 
 #endif
