@@ -11,16 +11,16 @@ ValidateForm::ValidateForm() { // default constructor
   formIsValid = false;
 }
 
-bool ValidateForm::checkForm() {
+bool ValidateForm::checkForm(string* form) {
 
-  if (stoi(registrationInfo[2]) < 18) {
+  if (stoi(form[2]) < 18) {
     cout << "User is too young to vote. \n"; // min age is 18
     formIsValid = false;                               // returns zero to exit code
-  } else if (registrationInfo[4].length() < 9 || registrationInfo[4].length() > 9) {
+  } else if (form[4].length() < 9 || registrationInfo[4].length() > 9) {
     cout << "SSN is invalid: wrong length. \n"; // A social security number is 9 digits, so if
                                   // the user types a SSN that is too short,
     formIsValid = false;                     // this message is displayed
-  } else if (registrationInfo[5] == "1") {
+  } else if (form[5] == "1") {
     cout << "User cannot vote because they are a felon. \n"; // if user answered
                                                              // Y or y to being
                                                              // a felon,
