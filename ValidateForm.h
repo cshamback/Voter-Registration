@@ -16,9 +16,9 @@ public:
   ValidateForm(); // default constructor
 
   string registrationInfo[6]; // fName, lName, age, residency, ssn, felony
-  string formType;            // same as registrationInfo[3]\
-  bool formIsValid;
+  string formType;            // same as registrationInfo[3]
 
+  bool formIsValid;
   bool checkForm(); // also acts as a getter method
 };
 
