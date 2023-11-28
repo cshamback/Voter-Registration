@@ -14,6 +14,7 @@ public:
   // First name, last name, age, residency, SSN, and felony status
   string formRegistrationInfo[6];
   string formType; // Overseas, Online, etc.
+  string felonyStatus;
   string fNameOutput, lNameOutput, ageOutput, ssnOutput, zipOutput,
       felonyOutput;
 };
