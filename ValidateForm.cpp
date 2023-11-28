@@ -15,12 +15,12 @@ bool ValidateForm::checkForm() {
 
   if (stoi(registrationInfo[2]) < 18) {
     cout << "User is too young to vote. \n"; // min age is 18
-    return 0;                                // returns zero to exit code
-  } else if (registrationInfo[4].length() < 9) {
-    cout << "SSN is invalid. \n"; // A social security number is 9 digits, so if
+    formIsValid = false;                               // returns zero to exit code
+  } else if (registrationInfo[4].length() < 9 || registrationInfo[4].length() > 9) {
+    cout << "SSN is invalid: wrong length. \n"; // A social security number is 9 digits, so if
                                   // the user types a SSN that is too short,
-    return 0;                     // this message is displayed
-  } else if (registrationInfo[5] == "y" || registrationInfo[5] == "Y") {
+    formIsValid = false;                     // this message is displayed
+  } else if (registrationInfo[5] == "1") {
     cout << "User cannot vote because they are a felon. \n"; // if user answered
                                                              // Y or y to being
                                                              // a felon,
@@ -29,10 +29,9 @@ bool ValidateForm::checkForm() {
     cout << "User is eligible to vote. \n"; // if everything passes, they are
                                             // eligible and it returns 1
     formIsValid = true;
-    return 1;
   }
 
-  return false;
+  return formIsValid;
 }
 
 #endif
