@@ -5,6 +5,7 @@
 */
 
 #include <iostream>
+#include <memory> // smart ptrs - should reduce memory usage
 #include <string>
 
 #include "RegistrationManager.h"
@@ -16,47 +17,50 @@
 
 using namespace std;
 
-string form[6]; // holds filled out data, can be copied as needed
 bool formIsValid;
-
-void setFormData(string *ogForm, string *newForm) {
-  // c++ does not allow for direct assignment from one list to another
-  // instead, we have to assign one item at a time
-  for (int i = 0; i < 6; i++) {
-    newForm[i] = ogForm[i];
-  }
-}
 
 int main() {
 
   // create and fill out registration form
   VoterForm voterForm;     // Creates a VoterForm object
   voterForm.fillOutForm(); // Opens prompts for user to fill out a form
-  setFormData(voterForm.getFormInfo(), form);
 
   // ValidateForm
   //  get form from voterForm object
   ValidateForm validateForm;
-  setFormData(form, validateForm.registrationInfo);
-  formIsValid = validateForm.checkForm();
+  formIsValid = validateForm.checkForm(voterForm.getFormInfo());
 
   // ValidationStrategy
   //  choose an algorithm to validate the form
-  // ignoring this for now, will add in sprint 3
-  
-  ValidationStrategy strategy;
-  if (voterForm.getFormInfo()[0] == "Online") {
-    strategy.chooseOnlineStrategy(new ValidateOnlineForm());
-  } else { // overseas
-    strategy.chooseOverseasStrategy(new ValidateOverseasForm());
-  } 
+
+  /*
+    Using smart pointers to create Online and Overseas objects - may help reduce
+    memory usage
+    */
+
+  shared_ptr<ValidationStrategy> strategy = make_unique<ValidationStrategy>();
+  bool strategyIsValid =
+      false; // checks whether choose____Strategy evaluated to true or false
+  if (voterForm.formType == "Online") {
+    shared_ptr<ValidateOnlineForm> online = make_unique<ValidateOnlineForm>();
+
+    strategy->chooseOnlineStrategy(online.get(), voterForm.getFormInfo());
+
+    strategyIsValid = online->formIsValid;
+  } else { // overseas;
+    shared_ptr<ValidateOverseasForm> overseas =
+        make_unique<ValidateOverseasForm>();
+    strategyIsValid = strategy->chooseOverseasStrategy(overseas.get());
+    // cout << "Chose overseas strategy. Evaluation: " << strategyIsValid <<
+    // endl;
+  }
 
   // RegistrationManager
   RegistrationManager mgr; // empty constructor/no default values
-  if (validateForm.formIsValid) {
+  if (validateForm.formIsValid && strategyIsValid) {
     // store ID and form info in registrationDB
     cout << "Your new voter ID: " << mgr.genID() << endl;
-    mgr.storeInfo(form, "Online");
+    mgr.storeInfo(voterForm.getFormInfo(), "Online");
   } else {
     cout << "Something went wrong. Your application has been rejected." << endl;
   }
